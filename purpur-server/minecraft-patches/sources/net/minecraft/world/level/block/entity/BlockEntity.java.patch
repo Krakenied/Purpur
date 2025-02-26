@@ -15,22 +15,19 @@
      }
  
      public final void loadWithComponents(CompoundTag tag, HolderLookup.Provider registries) {
-@@ -98,6 +_,15 @@
-         this.loadAdditional(tag, registries);
+@@ -99,6 +_,12 @@
      }
  
-+    // Purpur start - Persistent BlockEntity Lore and DisplayName
-+    protected void saveAdditional(CompoundTag nbt) {
+     protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
++        // Purpur start - Persistent BlockEntity Lore and DisplayName
 +        if (this.persistentLore != null) {
 +            net.minecraft.world.item.component.ItemLore.CODEC.encodeStart(net.minecraft.nbt.NbtOps.INSTANCE, this.persistentLore).result()
-+                .ifPresent(tag -> nbt.put("Purpur.persistentLore", tag));
++                .ifPresent(nbt -> tag.put("Purpur.persistentLore", nbt));
 +        }
-+    }
-+    // Purpur end - Persistent BlockEntity Lore and DisplayName
-+
-     protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
++        // Purpur end - Persistent BlockEntity Lore and DisplayName
      }
  
+     public final CompoundTag saveWithFullMetadata(HolderLookup.Provider registries) {
 @@ -378,4 +_,16 @@
  
          <T> T getOrDefault(DataComponentType<? extends T> component, T defaultValue);
